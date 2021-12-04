@@ -28,6 +28,8 @@ class BottomCircleList extends StatefulWidget {
   final Color? centerButtonSplashColor;
   final Curve curves;
   final Widget centerButtonText;
+  final Function(int) handleIndexChanged;
+  final Function() onSubmitTap;
 
   BottomCircleList({
     this.icons = const [],
@@ -43,6 +45,8 @@ class BottomCircleList extends StatefulWidget {
     this.curves = Curves.ease,
     required this.centerButtonText,
     this.centerButtonSplashColor = IColors.splashColor,
+    required this.handleIndexChanged,
+    required this.onSubmitTap,
   });
 
   @override
@@ -89,6 +93,7 @@ class _BottomCircleListState extends State<BottomCircleList>
 
   @override
   Widget build(BuildContext context) {
+    handleIndexChangeFunction(); // handle index changes with every state change.
     return Container(
       width: 200,
       height: 100,
@@ -154,7 +159,7 @@ class _BottomCircleListState extends State<BottomCircleList>
               color: Colors.transparent,
               child: InkWell(
                 splashColor: widget.centerButtonSplashColor,
-                onTap: () {},
+                onTap: widget.onSubmitTap(),
               ),
             )),
       ),
@@ -679,5 +684,17 @@ class _BottomCircleListState extends State<BottomCircleList>
     _animationLongRightController.dispose();
     _animationFromLeftToTopController.dispose();
     _animationFromRightToTopController.dispose();
+  }
+
+  void handleIndexChangeFunction() {
+    if (_currentDirection == PartDirection.left ||
+        _currentDirection == PartDirection.longLeft) {
+      widget.handleIndexChanged.call(0);
+    } else if (_currentDirection == PartDirection.top) {
+      widget.handleIndexChanged.call(1);
+    } else if (_currentDirection == PartDirection.right ||
+        _currentDirection == PartDirection.longRight) {
+      widget.handleIndexChanged.call(2);
+    }
   }
 }
