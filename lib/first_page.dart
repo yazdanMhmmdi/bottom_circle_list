@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 import 'package:circular_list_view/bottom_circle_list.dart';
 import 'package:circular_list_view/constants/assets.dart';
 import 'package:circular_list_view/constants/i_colors.dart';
@@ -50,10 +51,17 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
         indicatorColor: IColors.lightBlue,
         selectedIconColor: IColors.blue,
         centerButtonSplashColor: Colors.black12,
+        handleIndexChanged: (value) {
+          print("index:: ${value}");
+        },
+        onSubmitTap: () {
+          print("do somthing");
+        },
         centerButtonText: const Text("تایید",
             style: TextStyle(
               fontFamily: Assets.iranSans,
               color: Colors.white70,
+              fontWeight: FontWeight.w700,
             ),
             textAlign: TextAlign.center),
         icons: const [
@@ -63,20 +71,25 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
         ],
         textChilds: const [
           Text(
-            "سواری",
-            style: TextStyle(
-              fontFamily: Assets.iranSans,
-            ),
-          ),
-          Text(
             "سنگین",
             style: TextStyle(
+              fontSize: 14,
               fontFamily: Assets.iranSans,
             ),
           ),
           Text(
-            "وانتی",
+            "سواری",
             style: TextStyle(
+              fontSize: 14,
+              fontFamily: Assets.iranSans,
+            ),
+          ),
+          Text(
+            "نیمه سنگین",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 14,
+              height: 1.2,
               fontFamily: Assets.iranSans,
             ),
           )
