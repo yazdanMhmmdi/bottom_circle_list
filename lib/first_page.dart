@@ -1,50 +1,87 @@
-import 'package:circular_list_view/circle_list/radial_gesture_detector.dart';
+import 'dart:math';
+import 'package:circular_list_view/bottom_circle_list.dart';
+import 'package:circular_list_view/constants/assets.dart';
+import 'package:circular_list_view/constants/i_colors.dart';
+import 'package:circular_list_view/constants/my_icons.dart';
+import 'package:circular_list_view/shapes/border_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-import 'circle_list/circle_list.dart';
+class FirstPage extends StatefulWidget {
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({Key? key}) : super(key: key);
+class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          fit: StackFit.expand,
-          children: [
-            Column(
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.red,
+      backgroundColor: IColors.backgroundColor,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              color: Colors.orange,
+              child: Container(
+                width: 200,
+                height: 100,
+                child: CustomPaint(
+                  painter: BorderPainter(),
                 ),
-              ],
-            ),
-          ],
-        ),
-        bottomNavigationBar: Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: CircleList(
-              circleSize: 220,
-              outerCircleColor: Colors.blue,
-              innerCircleColor: Colors.red,
-              // origin: Offset(0, -500),
-              children: List.generate(
-                6,
-                (index) => Container(
-                    width: 10,
-                    color: Colors.yellow,
-                    child: Text("c: ${index}")),
               ),
-              onDragUpdate: (update) {
-                Offset offset = Offset(update.point.dx , update.point.dy);
-                print("update : x:${update}y: ${update.degree}");
-                // if (offset.dx == 46.5 39.0)
-              },
             ),
           ),
-        ));
+        ],
+      ),
+      bottomNavigationBar: BottomCircleList(
+        centerButtonColor: IColors.blue,
+        indicatorColor: IColors.lightBlue,
+        selectedIconColor: IColors.blue,
+        centerButtonSplashColor: Colors.black12,
+        centerButtonText: const Text("تایید",
+            style: TextStyle(
+              fontFamily: Assets.iranSans,
+              color: Colors.white70,
+            ),
+            textAlign: TextAlign.center),
+        icons: const [
+          MyIcons.tow_truck_svgrepo_com,
+          MyIcons.car_svgrepo_com,
+          MyIcons.truck_svgrepo_com,
+        ],
+        textChilds: const [
+          Text(
+            "سواری",
+            style: TextStyle(
+              fontFamily: Assets.iranSans,
+            ),
+          ),
+          Text(
+            "سنگین",
+            style: TextStyle(
+              fontFamily: Assets.iranSans,
+            ),
+          ),
+          Text(
+            "وانتی",
+            style: TextStyle(
+              fontFamily: Assets.iranSans,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
