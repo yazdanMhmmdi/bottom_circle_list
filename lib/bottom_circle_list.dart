@@ -159,7 +159,7 @@ class _BottomCircleListState extends State<BottomCircleList>
               color: Colors.transparent,
               child: InkWell(
                 splashColor: widget.centerButtonSplashColor,
-                onTap: widget.onSubmitTap(),
+                onTap: widget.onSubmitTap,
               ),
             )),
       ),
